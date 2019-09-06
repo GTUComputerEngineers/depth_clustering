@@ -149,7 +149,9 @@ catkin_package(
 
 include_directories(
   src
-sub/autonomous-vehicle/Linux_Codes/src/ZmqCommunication
+  sub/autonomous-vehicle/Linux_Codes/src/ZmqCommunication
+  sub/autonomous-vehicle/Linux_Codes/src/CommonLib
+  ${PROJECT_BINARY_DIR}/sub/autonomous-vehicle/Linux_Codes/src/ProtoFiles
   # for QT moc files
   ${PROJECT_BINARY_DIR}/src
   # dependencies we have no control over
@@ -161,10 +163,12 @@ sub/autonomous-vehicle/Linux_Codes/src/ZmqCommunication
   SYSTEM ${QGLVIEWER_INCLUDE_DIR}
   SYSTEM ${catkin_INCLUDE_DIRS}
 )
-
+add_subdirectory(sub/autonomous-vehicle/Linux_Codes/src/ProtoFiles)
 add_subdirectory(src)
 add_subdirectory(examples)
 add_subdirectory(sub/autonomous-vehicle/Linux_Codes/src/ZmqCommunication)
+add_subdirectory(sub/autonomous-vehicle/Linux_Codes/src/CommonLib)
+
 message(STATUS "BUILD_TESTING: ${BUILD_TESTING}")
 
 if (${BUILD_TESTING})

@@ -27,8 +27,10 @@
 
 #include "communication/abstract_client.h"
 #include "publisher.h"
+#include "server.h"
 #include "utils/cloud.h"
 #include "utils/useful_typedefs.h"
+#include <spdlog/spdlog.h>
 
 namespace depth_clustering {
 
@@ -82,6 +84,10 @@ class Visualizer : public QGLViewer,
  private:
   void DrawCloud(const Cloud& cloud);
   void DrawCube(const Eigen::Vector3f& center, const Eigen::Vector3f& scale);
+  void responseClusterInfo(Eigen::Vector3f& center, float dist);
+
+  seqreqrep::Server m_server;
+  std::shared_ptr<spdlog::logger> m_logger;
 
   bool _updated;
   ObjectPtrStorer _cloud_obj_storer;
