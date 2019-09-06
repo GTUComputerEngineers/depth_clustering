@@ -1,6 +1,7 @@
 add_library(visualization SHARED visualizer.cpp)
 target_link_libraries(visualization
                       identifiable
+                      ZmqCommunication
                       ${QGLVIEWER_LIBRARY}
                       ${MY_QT_LIBRARIES}
                       ${OPENGL_gl_LIBRARY}

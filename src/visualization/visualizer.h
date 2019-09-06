@@ -26,6 +26,7 @@
 #include <vector>
 
 #include "communication/abstract_client.h"
+#include "publisher.h"
 #include "utils/cloud.h"
 #include "utils/useful_typedefs.h"
 
@@ -85,6 +86,7 @@ class Visualizer : public QGLViewer,
   bool _updated;
   ObjectPtrStorer _cloud_obj_storer;
   Cloud _cloud;
+  pubsub::Publisher m_publisher;
   mutable std::mutex _cloud_mutex;
 };
 

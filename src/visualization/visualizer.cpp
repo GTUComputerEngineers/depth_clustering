@@ -14,7 +14,7 @@
 // with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include "./visualizer.h"
-
+#include "comBase.h"
 #include <algorithm>
 #include <chrono>
 #include <ctime>
@@ -24,24 +24,32 @@
 
 namespace depth_clustering {
 
-using std::string;
-using std::vector;
 using std::array;
+using std::string;
 using std::to_string;
+using std::vector;
 
+using std::lock_guard;
 using std::map;
 using std::mutex;
 using std::string;
-using std::vector;
 using std::thread;
-using std::lock_guard;
 using std::unordered_map;
+using std::vector;
 
 static vector<array<int, 3>> COLORS;
 
 Visualizer::Visualizer(QWidget* parent)
-    : QGLViewer(parent), AbstractClient<Cloud>(), _updated{false} {
+    : QGLViewer(parent),
+      AbstractClient<Cloud>(),
+      _updated{false},
+      m_publisher(true) {
   _cloud_obj_storer.SetUpdateListener(this);
+  std::string addr;
+  addr.clear();
+  addr.resize(50);
+  sprintf(&addr.front(), zmqbase::PROC_CONNECTION.c_str(), "lidar_pub");
+  m_publisher.connect(addr);
 }
 
 void Visualizer::draw() {
@@ -70,12 +78,14 @@ void Visualizer::draw() {
     if (min_point.x() < max_point.x()) {
       extent = max_point - min_point;
     }
-      auto dist =  sqrt(center.x()*center.x()+center.y()*center.y()+center.z()*center.z());
-      if( dist < 25)
-      {
-          std::cout <<"dist: " <<  dist <<"-x: "<< center.x() <<"-y: "<< center.y() <<"-z: "<<center.z()<< std::endl;
-          DrawCube(center, extent);
-      }
+    auto dist = sqrt(center.x() * center.x() + center.y() * center.y() +
+                     center.z() * center.z());
+    if (dist < 25) {
+      m_publisher.publish("lidar/distance", "1");
+      std::cout << "dist: " << dist << "-x: " << center.x()
+                << "-y: " << center.y() << "-z: " << center.z() << std::endl;
+      DrawCube(center, extent);
+    }
   }
 }
 
