@@ -100,7 +100,7 @@ void Visualizer::draw() {
       temp[2] = center.z();
       temp[3] = dist;
       temp[4] = center.z();
-
+      arr.push_back(temp);
       /*std::cout << "dist: " << dist << "-x: " << center.x()
                 << "-y: " << center.y() << "-z: " << center.z() << std::endl;*/
       m_logger->info("dist:{}-x{}-y{}-z{}", dist, center.x(), center.y(),
@@ -109,7 +109,9 @@ void Visualizer::draw() {
       responseClusterInfo(center, dist);
     }
   }
+
   std::string msg = Common::lidar::create_clusters(arr);
+
   m_publisher.publish("lidar/data", msg);
 }
 
