@@ -1,6 +1,11 @@
+find_package(Protobuf REQUIRED)
 add_library(visualization SHARED visualizer.cpp)
 target_link_libraries(visualization
                       identifiable
+                      ZmqCommunication
+                      CommonLib
+                      ProtoFiles
+                      ${PROTOBUF_LIBRARY}
                       ${QGLVIEWER_LIBRARY}
                       ${MY_QT_LIBRARIES}
                       ${OPENGL_gl_LIBRARY}
