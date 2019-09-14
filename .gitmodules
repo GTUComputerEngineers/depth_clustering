@@ -1,3 +1,6 @@
+[submodule "sub/ai"]
+	path = sub/ai
+	url = https://github.com/GTUComputerEngineers/autonomous-vehicle-ai.git
 [submodule "sub/autonomous-vehicle"]
 	path = sub/autonomous-vehicle
 	url = https://github.com/GTUComputerEngineers/autonomous-vehicle.git
