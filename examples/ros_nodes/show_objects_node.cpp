@@ -85,11 +85,11 @@ int main(int argc, char* argv[]) {
   Visualizer visualizer;
   visualizer.show();
 
-  int min_cluster_size = 15;  // test et
-  int max_cluster_size = 300;
+  int min_cluster_size = 200;  // test et
+  int max_cluster_size = 4000;
 
   int smooth_window_size = 7;
-  Radians ground_remove_angle = 7_deg;
+  Radians ground_remove_angle = 8_deg;
 
   auto depth_ground_remover = DepthGroundRemover(
       *proj_params_ptr, ground_remove_angle, smooth_window_size);
