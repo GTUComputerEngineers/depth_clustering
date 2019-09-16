@@ -93,8 +93,8 @@ void Visualizer::draw() {
     auto dist = sqrt(center.x() * center.x() + center.y() * center.y() +
                      center.z() * center.z());
 
-    if (dist < 25) {
-      std::array<float, 5> temp;
+    if (dist < 25 && center.x() > 0.50) {  // 0.50 meaning is after 50cm
+      std::array<float, 5> temp;           // 25 is distance 25meter
       temp[0] = center.x();
       temp[1] = center.y();
       temp[2] = center.z();
