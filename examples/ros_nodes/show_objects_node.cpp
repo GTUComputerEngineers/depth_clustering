@@ -85,8 +85,8 @@ int main(int argc, char* argv[]) {
   Visualizer visualizer;
   visualizer.show();
 
-  int min_cluster_size = 200;  // test et
-  int max_cluster_size = 4000;
+  int min_cluster_size = 25;  // test et
+  int max_cluster_size = 3900;
 
   int smooth_window_size = 7;
   Radians ground_remove_angle = 8_deg;
