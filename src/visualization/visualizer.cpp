@@ -90,10 +90,10 @@ void Visualizer::draw() {
     if (min_point.x() < max_point.x()) {
       extent = max_point - min_point;
     }
-    auto dist = sqrt(center.x() * center.x() + center.y() * center.y() +
-                     center.z() * center.z());
+    auto dist = sqrt(center.x() * center.x() + center.y() * center.y());
+    dist = sqrt(dist * dist + center.z() * center.z());
 
-    if (dist < 25 && center.x() > 0.50) {  // 0.50 meaning is after 50cm
+    if (dist < 10) {  // 0.50 meaning is after 50cm
       std::array<float, 5> temp;           // 25 is distance 25meter
       temp[0] = center.x();
       temp[1] = center.y();
